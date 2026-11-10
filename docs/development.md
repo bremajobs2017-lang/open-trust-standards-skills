@@ -3,12 +3,14 @@
 Python 3.12+ is required. Install with `python -m pip install -e ".[dev]"` in an isolated environment. See [installation](installation.md) for Windows interpreter details.
 
 ```sh
-python -m ruff check src tests
-python -m ruff format --check src tests
+python -m ruff check src tests scripts
+python -m ruff format --check src tests scripts
 trust-skills validate --root .
 python -m pytest -q
 python -m build
 ```
+
+For the exact CI tool selection, install `requirements/qa.txt`, then install this repository with `python -m pip install --no-deps --no-build-isolation -e .`. Artifact installation tests are a separate command: `python scripts/install_smoke.py --wheelhouse tmp/qa-wheelhouse`, after building and explicitly preparing the wheelhouse as described in [installation](installation.md). See [QA policy](qa-policy.md) and [the evidence matrix](qa-matrix.md). Do not label tools missing from another QA environment as verified because they ran here.
 
 ## Architecture
 

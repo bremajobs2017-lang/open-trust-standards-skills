@@ -87,6 +87,10 @@ def validate_skill(path: Path):
 
 def validate_library(root: Path, expected):
     skills = root / "skills"
+    if not skills.is_dir() or not (root / "standards/registry.yaml").is_file():
+        raise InputError(
+            "Source validation requires a checkout or extracted source distribution containing skills/ and standards/"
+        )
     actual = {p.name for p in skills.iterdir() if p.is_dir()}
     if actual != set(expected):
         raise InputError("Skill directories do not match the 20-skill CLI catalog")
@@ -112,6 +116,8 @@ def validate_library(root: Path, expected):
             raise InputError("Registry IDs must be unique and URLs must use HTTPS")
         ids.add(source["id"])
     for name in sorted(actual):
+        if not (skills / name).resolve().is_relative_to(skills.resolve()):
+            raise InputError("Skill directory escapes the source library")
         front = validate_skill(skills / name)
         refs = front.get("metadata", {}).get("standards", "").split(",")
         if not refs or any(ref not in ids for ref in refs):

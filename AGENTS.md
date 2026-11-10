@@ -18,7 +18,7 @@ Work only in this repository and within the user's requested scope. The owner ha
 
 Each skill lives in skills/<name>/SKILL.md and follows the Agent Skills specification. Define its purpose, triggers, inputs, prerequisites, workflow, safeguards, outputs, examples, validation criteria, limitations, and official references. Include human review checkpoints for consequential decisions. Avoid unnecessary dependencies and duplication.
 
-Shared Python 3.12+ tools live in src/trust_skills. Run `python -m pip install -e ".[dev]"`, `python -m ruff check src tests`, `python -m ruff format --check src tests`, `python -m pytest -q`, and `trust-skills validate --root .`. Every skill needs a synthetic example and meaningful deterministic tests. Keep the CLI catalog, standards registry, skill documentation, and test coverage synchronized. No network access or input execution belongs in local review helpers.
+Shared Python 3.12+ tools live in src/trust_skills. Run `python -m pip install -e ".[dev]"`, `python -m ruff check src tests scripts`, `python -m ruff format --check src tests scripts`, `python -m pytest -q`, and `trust-skills validate --root .`. Every skill needs a synthetic example and meaningful deterministic tests. Keep the CLI catalog, standards registry, skill documentation, and test coverage synchronized. No network access or input execution belongs in local review helpers. The separate registry maintenance command may request official URLs only with explicit `--live` opt-in; HTTP retrieval must never be described as semantic verification.
 
 ## Validation and reporting
 

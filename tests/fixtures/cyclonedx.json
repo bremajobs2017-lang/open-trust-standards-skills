@@ -1,0 +1,39 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "metadata": {
+    "component": {
+      "bom-ref": "root"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "synthetic-図",
+      "bom-ref": "duplicate",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "synthetic-secondary",
+      "version": "2.0",
+      "bom-ref": "duplicate",
+      "licenses": []
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "root",
+      "dependsOn": [
+        "duplicate",
+        "absent"
+      ]
+    }
+  ]
+}

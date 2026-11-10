@@ -1,0 +1,106 @@
+{
+  "provenance": "Original synthetic QA scenarios, separately curated from skills/*/examples; expectations specified from scenario rationale before running helpers. AI-authored; no independent human assessor review is claimed.",
+  "license": "Apache-2.0",
+  "personal_data": false,
+  "live_credentials": false,
+  "cases": [
+    {
+      "file": "accessibility.html",
+      "skill": "accessible-html-review",
+      "expected_codes": [
+        "CONTROL_NAME",
+        "IMAGE_ALT"
+      ],
+      "finding_count": 2,
+      "rationale": "Unlinked anchor triggers the known static empty-name heuristic; one image omits alt.",
+      "known_false_positives": [
+        "CONTROL_NAME on an anchor without href: it is a destination, not an interactive link."
+      ],
+      "known_false_negatives": [
+        "Unhelpful alt='image' is present, so purpose and quality are missed. Browser behavior is untested."
+      ]
+    },
+    {
+      "file": "cyclonedx.json",
+      "skill": "dependency-sbom-review",
+      "expected_codes": [
+        "SBOM_MISSING_FIELD",
+        "SBOM_DUPLICATE_ID",
+        "SBOM_DANGLING_REF"
+      ],
+      "finding_count": 4,
+      "rationale": "One missing version, one missing license assertion, one duplicate ref, one unknown dependency.",
+      "known_false_positives": [
+        "Missing version/license is a local inventory-quality gap, not necessarily a schema violation."
+      ],
+      "known_false_negatives": [
+        "No official schema, vulnerability, license-expression, provenance or completeness validation."
+      ]
+    },
+    {
+      "file": "spdx.json",
+      "skill": "dependency-sbom-review",
+      "expected_codes": [
+        "SBOM_MISSING_FIELD"
+      ],
+      "finding_count": 1,
+      "rationale": "NOASSERTION is deliberately valid evidence uncertainty, reported as a local quality gap.",
+      "known_false_positives": [
+        "NOASSERTION is allowed in SPDX; this finding must not be called a format failure."
+      ],
+      "known_false_negatives": [
+        "Download location, rights, relationships and package completeness require separate review."
+      ]
+    },
+    {
+      "file": "openapi.json",
+      "skill": "api-security-review",
+      "expected_codes": [
+        "API_ANONYMOUS",
+        "API_OBJECT_AUTH_REVIEW",
+        "API_UNRESOLVED_REF"
+      ],
+      "finding_count": 3,
+      "rationale": "Anonymous alternative on a public operation, identifier path test need, and an unresolved local traversal-shaped ref.",
+      "known_false_positives": [
+        "Public access is intentional in this case; object-ID presence is not proof of a vulnerability."
+      ],
+      "known_false_negatives": [
+        "Declared bearer authentication says nothing about enforcement, limits, or tenant isolation."
+      ]
+    },
+    {
+      "file": "risks.json",
+      "skill": "ai-risk-register",
+      "expected_codes": [
+        "RISK_APPROVAL_GAP"
+      ],
+      "finding_count": 1,
+      "rationale": "Closed low-priority risk lacks evidence; accepted high-priority risk has only a supplied evidence assertion.",
+      "expected_risk_order": [
+        "R-大",
+        "R-小"
+      ],
+      "known_false_positives": [
+        "Missing evidence may mean a recordkeeping gap, not absence of an actual approval."
+      ],
+      "known_false_negatives": [
+        "Supplied approval evidence is not checked for authority, currency or effectiveness; severe harm may outrank numeric triage."
+      ]
+    },
+    {
+      "file": "adversarial.html",
+      "skill": "accessible-html-review",
+      "expected_codes": [
+        "IMAGE_ALT",
+        "CONTROL_NAME"
+      ],
+      "finding_count": 2,
+      "rationale": "Comment is data; offline parsing must not execute it. Host instruction resistance is a separate manual test.",
+      "known_false_positives": [],
+      "known_false_negatives": [
+        "A passing offline parser test does not establish agent-host prompt-injection resistance."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "Synthetic curated inventory",
+  "documentNamespace": "https://example.invalid/spdx/qa-synthetic",
+  "creationInfo": {
+    "creators": [
+      "Tool: synthetic-qa-fixture"
+    ],
+    "created": "2026-11-10T00:00:00Z"
+  },
+  "packages": [
+    {
+      "name": "synthetic-qa-library",
+      "versionInfo": "3.0",
+      "SPDXID": "SPDXRef-library",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    }
+  ]
+}

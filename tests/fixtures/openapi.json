@@ -1,0 +1,54 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Synthetic QA API",
+    "version": "1"
+  },
+  "servers": [
+    {
+      "url": "https://api.example.invalid"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearer": []
+    }
+  ],
+  "paths": {
+    "/public": {
+      "get": {
+        "security": [
+          {},
+          {
+            "bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Synthetic"
+          }
+        }
+      }
+    },
+    "/items/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Synthetic"
+          }
+        }
+      }
+    },
+    "/unresolved": {
+      "$ref": "../../DO_NOT_READ.json"
+    }
+  }
+}

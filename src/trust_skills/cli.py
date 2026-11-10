@@ -6,9 +6,10 @@ import math
 import sys
 from pathlib import Path
 
-from .core import InputError, read_text, render
+from .core import InputError, read_text, render, within_root
 from .engine import SKILLS, TEXT_SKILLS, run
 from .metadata import validate_library
+from .registry import verify_registry
 
 
 def reject_constant(_):
@@ -47,10 +48,33 @@ def main(argv=None):
     validate.add_argument(
         "--root", type=Path, default=Path.cwd(), help="Repository root (not installed wheel)"
     )
+    registry = commands.add_parser(
+        "registry", help="Check registry structure; live URL requests require --live"
+    )
+    registry.add_argument("--registry", type=Path, default=Path("standards/registry.yaml"))
+    registry.add_argument(
+        "--live",
+        action="store_true",
+        help="Opt in to bounded official-host HTTP retrieval (no semantic verification)",
+    )
+    registry.add_argument("--timeout", type=float, default=5.0)
+    registry.add_argument(
+        "--output", type=Path, help="New JSON evidence file; existing files are never overwritten"
+    )
+    registry.add_argument(
+        "--workspace-root",
+        type=Path,
+        help="Reject registry/output paths escaping this optional boundary",
+    )
     review = commands.add_parser("run", help="Run bounded local analysis")
     review.add_argument("skill", choices=SKILLS)
     review.add_argument("--input", required=True, type=Path, help="Local UTF-8 file, up to 5 MB")
     review.add_argument("--format", choices=("json", "markdown"), default="json")
+    review.add_argument(
+        "--workspace-root",
+        type=Path,
+        help="Reject input/output paths escaping this optional boundary",
+    )
     review.add_argument("--output", type=Path, help="Write a new file; refuses to overwrite")
     review.add_argument(
         "--fail-on-findings", action="store_true", help="Return 1 if findings are present"
@@ -63,6 +87,28 @@ def main(argv=None):
         if args.command == "validate":
             print(json.dumps(validate_library(args.root, SKILLS), sort_keys=True))
             return 0
+        if args.command == "registry":
+            within_root(args.registry, args.workspace_root)
+            if args.output:
+                within_root(args.output, args.workspace_root)
+            # Reserve output first so an existing path cannot cause unnecessary network requests.
+            stream = args.output.open("x", encoding="utf-8") if args.output else None
+            try:
+                result = verify_registry(args.registry, live=args.live, timeout=args.timeout)
+                output = json.dumps(result, indent=2, ensure_ascii=True) + "\n"
+                if stream:
+                    stream.write(output)
+                else:
+                    print(output, end="")
+            finally:
+                if stream:
+                    stream.close()
+            return (
+                1 if any(e["retrieval_status"] != "retrieved" for e in result["retrievals"]) else 0
+            )
+        within_root(args.input, args.workspace_root)
+        if args.output:
+            within_root(args.output, args.workspace_root)
         text = read_text(args.input)
         data = (
             text

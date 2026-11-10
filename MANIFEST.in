@@ -3,3 +3,6 @@ recursive-include skills *.md *.json *.html *.py *.txt
 recursive-include standards *.yaml
 recursive-include docs *.md
 recursive-include tests *.py
+recursive-include tests/fixtures *.json *.html
+recursive-include scripts *.py
+recursive-include requirements *.txt
