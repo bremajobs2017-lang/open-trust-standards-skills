@@ -16,7 +16,7 @@ The owner has authorized the initial 20-skill library. Contributions to skill gu
 
 ## Quality expectations
 
-Use Python 3.12+ and install development dependencies with `python -m pip install -e ".[dev]"`. Before submitting, run `python -m ruff check src tests`, `python -m ruff format --check src tests`, `python -m pytest -q`, `trust-skills validate --root .`, and `python -m build`. The CI matrix checks Python 3.12–3.14 on Linux and Windows. See [development guidance](docs/development.md) for architecture and test expectations.
+Use Python 3.12+ and install development dependencies with `python -m pip install -e ".[dev]"`. Before submitting, run `python -m ruff check src tests scripts`, `python -m ruff format --check src tests scripts`, `python -m pytest -q`, `trust-skills validate --root .`, and `python -m build`. The CI matrix checks Python 3.12–3.14 on Linux and Windows, including separate clean artifact installation tests. See [development guidance](docs/development.md) for commands and [QA policy](docs/qa-policy.md) for exact dependency/action pins, evidence labels, and host/live-network test boundaries.
 
 - Use plain, inclusive language and accessible examples.
 - Cite authoritative sources and specify standards versions and assessment scope.

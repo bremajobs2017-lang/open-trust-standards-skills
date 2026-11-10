@@ -1,0 +1,3 @@
+# Runtime dependency and PEP 517 build dependency needed for offline artifact installation.
+PyYAML==6.0.3
+setuptools==84.2.1

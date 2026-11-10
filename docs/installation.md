@@ -28,6 +28,8 @@ Replace `-3.14` with your installed Python version (3.12+). For runtime use with
 
 ## Codex
 
+**Installing the CLI and installing skills are separate operations.** A wheel install offers `trust-skills` only; no `skills/` source data is included in the wheel. An sdist or checkout contains the 20 directories, examples and registry, but pip installing that sdist also installs only the CLI into site-packages. Extract or retain the source tree for copying skills and for `trust-skills validate --root <source-tree>`. Neither operation alone proves host activation. Use the [manual Codex test plan](codex-integration-test-plan.md) when deliberately testing a host.
+
 Codex discovers local skills under `.agents/skills` in a repository or `~/.agents/skills` for a user. It also supports its skill installer. See the [official OpenAI skill documentation](https://learn.chatgpt.com/docs/build-skills) for current discovery and invocation behavior.
 
 For local use, copy selected folders from this repository's `skills/` into the chosen host's skill directory, retaining the folder name and `examples/`. Copy the repository LICENSE alongside your distribution. Inspect the destination first and do not overwrite an existing skill. Installing all 20 is optional; a smaller relevant selection keeps discovery focused. This repository does not automatically modify your agent configuration or install into other projects.
@@ -63,3 +65,16 @@ trust-skills run ai-risk-register --input skills/ai-risk-register/examples/input
 ```
 
 The first and third examples deliberately contain review gaps. These examples use synthetic data, not production evidence. Each skill's `SKILL.md` states its expected result and manual validation work.
+
+## Test built artifacts in clean environments
+
+From the checkout or extracted sdist, with build installed:
+
+```sh
+python -m build --no-isolation
+# Explicit network preparation; install smoke has no network fallback.
+python -m pip download --only-binary=:all: --dest tmp/qa-wheelhouse -r requirements/smoke.txt
+python scripts/install_smoke.py --wheelhouse tmp/qa-wheelhouse
+```
+
+The smoke script selects this tree's package version, installs the sdist and wheel in separate fresh venvs, runs help/list and three flagship JSON/Markdown examples away from the checkout, checks import origin, and verifies both the source-data requirement and successful validation with an explicit extracted sdist. It records artifact hashes and results under a new ignored `tmp/install-smoke-*/result.json`. It never copies files into host skill locations or deletes a user-selected directory. Wheelhouse preparation must be repeated for each Python/platform ABI; a Windows 3.14 wheelhouse cannot establish Linux or Python 3.12 compatibility.

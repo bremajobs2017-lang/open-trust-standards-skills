@@ -4,7 +4,9 @@
 
 ## Project status
 
-The initial library is implemented as a pre-release (0.1.0): seven accessibility skills, seven cybersecurity skills, and six AI governance skills. Every skill has portable instructions, valid Agent Skills frontmatter, a synthetic example, a working offline helper, and deterministic tests. Human domain review is required before relying on outputs for consequential decisions.
+The released pre-release baseline is v0.1.0: seven accessibility skills, seven cybersecurity skills, and six AI governance skills. This branch develops QA hardening toward v0.2.0 (`0.2.0.dev0` package version); it does not create a release. Every skill has portable instructions, locally checked frontmatter, a synthetic example, an offline helper, and deterministic tests. Human domain review is required before relying on outputs for consequential decisions.
+
+Independent v0.1.0 source-ZIP QA reported 144 passing tests and structural validation of 20 skills/16 registry entries. Independent lint/build, live retrieval of all source URLs, and actual Codex discovery/activation were **NOT VERIFIED**. See the [QA matrix](docs/qa-matrix.md) for evidence separated by environment and scope.
 
 ## Skill library
 
@@ -59,6 +61,8 @@ python -m pytest -q
 
 For Windows, Codex, and other compatible agents, read [installation](docs/installation.md). The shared CLI is installed separately from skill folders; examples assume the repository root as the working directory. No package publication or automatic agent configuration is performed.
 
+The wheel intentionally contains the Python CLI, **not** the 20 skill directories. Use a checkout or extracted sdist for skills, examples and source validation. `pip install` never installs or activates these skills in an agent host. See [the opt-in manual Codex checklist](docs/codex-integration-test-plan.md).
+
 ## Structure and verification
 
 - `skills/<name>/SKILL.md`: activation, inputs, procedures, outputs, examples, validation, limitations, and official references.
@@ -67,6 +71,8 @@ For Windows, Codex, and other compatible agents, read [installation](docs/instal
 - `tests/`: deterministic behavioral tests for all 20 skills, metadata, privacy, invalid inputs, and reports.
 - `standards/registry.yaml`: source verification and edition notes.
 - `.github/workflows/ci.yml`: lint, formatting, tests, skill validation, and builds across Python 3.12–3.14 on Linux and Windows.
+
+QA hardening adds fresh-environment sdist/wheel install smoke tests, separately curated synthetic fixtures with documented heuristic limitations, negative tests, and explicit [structural versus live registry checks](docs/registry-verification.md). HTTP retrieval never establishes semantic verification. [QA policy](docs/qa-policy.md) records exact dependency/action pins and what CI does and does not exercise.
 
 See [CLI contracts](docs/cli.md), [development guidance](docs/development.md), [local validation results](docs/validation.md), and [branch publication and PR guidance](docs/publishing.md).
 

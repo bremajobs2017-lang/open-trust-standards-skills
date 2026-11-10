@@ -1,0 +1,29 @@
+{
+  "risks": [
+    {
+      "id": "R-小",
+      "system_id": "synthetic-qa-system",
+      "scenario": "Synthetic answer is stale",
+      "harm": "Demo reader gets outdated information",
+      "owner": "QA role",
+      "treatment": "Require source-date review",
+      "status": "closed",
+      "review_date": "2027-01-15",
+      "likelihood": 2,
+      "impact": 2
+    },
+    {
+      "id": "R-大",
+      "system_id": "synthetic-qa-system",
+      "scenario": "Synthetic routing selects wrong recipient",
+      "harm": "Synthetic information routed incorrectly",
+      "owner": "QA role",
+      "treatment": "Require recipient confirmation",
+      "status": "accepted",
+      "review_date": "2027-01-15",
+      "likelihood": 5,
+      "impact": 4,
+      "approval_evidence": "Synthetic record; existence alone does not establish valid approval"
+    }
+  ]
+}

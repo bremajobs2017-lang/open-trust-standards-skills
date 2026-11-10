@@ -7,12 +7,13 @@ from pathlib import Path
 MAX_BYTES = 5_000_000
 SECRET_PATTERNS = (
     re.compile(
-        r"(?i)\b(?:password|passwd|api[_-]?key|secret|token)\b\s*[:=]\s*['\"]?([^\s'\",;<>]+)"
+        r"""(?i)\b(?:password|passwd|api[_-]?key|secret|token)\b['"]?\s*[:=]\s*(?:"[^"\r\n]*"|'[^'\r\n]*'|[^\s'",;<>]+)"""
     ),
     re.compile(r"\b(?:gh[pousr]_[A-Za-z0-9_]{20,}|AKIA[A-Z0-9]{16})\b"),
     re.compile(
         r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----[\s\S]*?(?:-----END (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|$)"
     ),
+    re.compile(r"(?i)\b(?:Bearer|Basic)\s+[A-Za-z0-9._~+/-]+=*"),
 )
 
 
@@ -24,6 +25,12 @@ def read_text(path: Path) -> str:
     if not path.is_file() or path.stat().st_size > MAX_BYTES:
         raise InputError("Input must be a local file no larger than 5 MB")
     return path.read_text(encoding="utf-8-sig")
+
+
+def within_root(path: Path, root: Path | None) -> Path:
+    if root is not None and not path.resolve().is_relative_to(root.resolve()):
+        raise InputError("Path escapes the explicitly selected workspace root")
+    return path
 
 
 def object_input(value, label="input") -> dict:
@@ -56,7 +63,15 @@ def redact(text: str) -> str:
         text = pattern.sub("[REDACTED]", text)
     # URL credentials and common sensitive query parameters.
     text = re.sub(r"(?i)(https?://)[^/@\s]+:[^/@\s]+@", r"\1[REDACTED]@", text)
-    return text
+    return "".join(
+        f"\\u{ord(c):04x}"
+        if (ord(c) < 32 and c not in "\n\t")
+        or ord(c) == 127
+        or 0x202A <= ord(c) <= 0x202E
+        or 0x2066 <= ord(c) <= 0x2069
+        else c
+        for c in text
+    )
 
 
 def sanitize(value):

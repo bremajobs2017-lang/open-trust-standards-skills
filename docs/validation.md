@@ -1,5 +1,7 @@
 # Initial implementation validation
 
+This document records **historical maintainer-workspace observations for v0.1.0**, not independent ZIP QA or results for the current branch. The independent run did not have Ruff/build and did not test host discovery or fetch all source URLs. See [qa-matrix.md](qa-matrix.md) for scope-separated current evidence. Registry assertions are not independent retrieval records.
+
 Local verification on 2026-11-10 used Windows and Python 3.14.3 in the repository's `.venv`. The installed development tools were PyYAML 6.0.3, pytest 9.2.0, Ruff 0.17.4, build 1.6.1, and setuptools 84.2.1. The system `python` command resolved to a Store alias, so validation used explicit virtual-environment executables.
 
 | Check | Local result |

@@ -8,6 +8,10 @@ Exit codes: **0** means analysis completed (findings may exist); **1** means fin
 
 ## Report envelope
 
+`trust-skills registry --registry standards/registry.yaml` checks registry structure without network access. Add `--live --timeout 5 --output NEW_FILE.json` only to opt in to URL retrieval; this is a separate maintenance operation, not one of the offline review helpers. See [registry verification](registry-verification.md) for exact scope, bounds, evidence, and exit codes.
+
+For `run` and `registry`, optional `--workspace-root PATH` rejects input/output paths whose resolved location escapes that directory, including `..` and symlink resolution. Without this opt-in boundary, caller-specified paths may intentionally be outside the current directory. Artifact IDs and OpenAPI references are treated as data, never as authorization or output filenames. Path checks do not replace an OS sandbox against concurrent filesystem changes. Reports preserve normal multilingual text but expose control characters and bidi overrides as literal escapes.
+
 Standard output and saved reports use UTF-8, including when Windows pipes inherit a legacy code page. Markdown uses escaped evidence tables and explicit reference fields.
 
 Every review returns `schema_version`, `skill`, `assessment`, `summary.finding_count`, `findings`, `artifacts`, and `limitations`. A finding has `code`, `location`, `message`, `reference`, and `severity`. Most findings use `review`; selected dangerous-code and secret candidates use `high`. These local priorities are not standards-defined severities. `reference` uses a registry ID plus an optional verified topic identifier.
