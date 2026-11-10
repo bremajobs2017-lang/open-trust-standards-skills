@@ -1,0 +1,18 @@
+{
+  "name": "Synthetic classifier",
+  "version": "demo-1",
+  "owner": "Model team",
+  "intended_use": "Classify synthetic shapes",
+  "out_of_scope": "Real-world decisions",
+  "training_data": "Generated shapes with no personal data",
+  "limitations": "Demonstration only",
+  "evaluations": [
+    {
+      "metric": "accuracy",
+      "dataset": "synthetic-heldout-v1",
+      "result": "0.90 (synthetic fixture, not a measured model)",
+      "method": "Illustrative offline holdout",
+      "slice": "All generated shapes"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+name: Validate library
+
+on:
+  push:
+    branches: [main, feat/initial-20-skills]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.12', '3.13', '3.14']
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - name: Install CLI and development tools
+        run: python -m pip install -e ".[dev]"
+      - name: Lint
+        run: python -m ruff check src tests
+      - name: Check formatting
+        run: python -m ruff format --check src tests
+      - name: Validate skill metadata and registry
+        run: trust-skills validate --root .
+      - name: Test all skill workflows
+        run: python -m pytest -q
+      - name: Build source and wheel distributions
+        run: python -m build

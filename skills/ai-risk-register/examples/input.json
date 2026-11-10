@@ -1,0 +1,18 @@
+{
+  "risks": [
+    {
+      "id": "R1",
+      "system_id": "S1",
+      "scenario": "Synthetic summary omits a material caveat",
+      "harm": "User misunderstands a demo result",
+      "owner": "Risk team",
+      "treatment": "Human verification before release",
+      "status": "accepted",
+      "review_date": "2026-12-01",
+      "likelihood": 3,
+      "impact": 5,
+      "residual_likelihood": 2,
+      "residual_impact": 3
+    }
+  ]
+}

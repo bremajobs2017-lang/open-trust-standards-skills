@@ -1,35 +1,35 @@
 # Open Trust Standards Skills
 
-Planned Agent Skills for accessibility, cybersecurity, and AI governance—designed to help teams translate trust standards into practical, reviewable work.
+20 Agent Skills for accessibility, cybersecurity, and AI governance—designed to help teams translate trust standards into practical, reviewable work.
 
 ## Project status
 
-This repository is in its planning stage. The 20 skills below are a proposed roadmap; no skills have been implemented yet. Scope, standards mappings, and validation criteria will be refined before implementation.
+The initial library is implemented as a pre-release (0.1.0): seven accessibility skills, seven cybersecurity skills, and six AI governance skills. Every skill has portable instructions, valid Agent Skills frontmatter, a synthetic example, a working offline helper, and deterministic tests. Human domain review is required before relying on outputs for consequential decisions.
 
-## Planned skills
+## Skill library
 
-| # | Area | Planned skill | Intended outcome |
+| # | Area | Skill | Capability |
 | --- | --- | --- | --- |
-| 1 | Accessibility | Accessibility requirements and scoping | Define user needs, accessibility targets, and acceptance criteria. |
-| 2 | Accessibility | WCAG assessment planning | Prepare a structured assessment against an identified WCAG version and level. |
-| 3 | Accessibility | Keyboard and focus review | Review keyboard access, navigation order, and visible focus. |
-| 4 | Accessibility | Screen reader and semantic review | Review structure, names, roles, and assistive technology behavior. |
-| 5 | Accessibility | Accessible content and documents | Review content clarity, document structure, and alternative text. |
-| 6 | Accessibility | Accessibility remediation and evidence | Prioritize findings and document fixes and verification evidence. |
-| 7 | Cybersecurity | Security requirements and risk scoping | Identify assets, boundaries, security requirements, and risk assumptions. |
-| 8 | Cybersecurity | Threat modeling | Document threats, abuse cases, mitigations, and residual risks. |
-| 9 | Cybersecurity | Secure architecture review | Review trust boundaries, data flows, and architectural controls. |
-| 10 | Cybersecurity | Identity and access review | Assess authentication, authorization, and least privilege. |
-| 11 | Cybersecurity | Dependency and supply chain review | Review dependency provenance, vulnerabilities, and software inventory. |
-| 12 | Cybersecurity | Secure configuration and secrets review | Identify configuration weaknesses and unsafe secret handling. |
-| 13 | Cybersecurity | Incident readiness and response planning | Prepare response roles, playbooks, and evidence handling procedures. |
-| 14 | AI governance | AI system inventory and classification | Document AI use cases, ownership, impact, and risk classification. |
-| 15 | AI governance | AI impact and risk assessment | Assess affected stakeholders, foreseeable harms, and risk treatments. |
-| 16 | AI governance | Data governance and provenance | Review data sources, permissions, quality, and lineage. |
-| 17 | AI governance | Model evaluation and assurance | Define evaluation criteria and document performance and safety evidence. |
-| 18 | AI governance | Fairness and transparency review | Assess disparate impacts and prepare understandable disclosures. |
-| 19 | AI governance | Human oversight and accountability | Define decision authority, escalation paths, and oversight controls. |
-| 20 | AI governance | AI monitoring and governance evidence | Plan ongoing monitoring, change review, and governance records. |
+| 1 | accessibility | [wcag-audit-planner](skills/wcag-audit-planner/SKILL.md) | Scope and sample a WCAG 2.2 audit. |
+| 2 | accessibility | [accessible-html-review](skills/accessible-html-review/SKILL.md) | Check selected static HTML accessibility issues with line evidence. |
+| 3 | accessibility | [aria-pattern-review](skills/aria-pattern-review/SKILL.md) | Review selected widget roles, states, names, and references. |
+| 4 | accessibility | [keyboard-navigation-test](skills/keyboard-navigation-test/SKILL.md) | Identify focus-order candidates and guide manual keyboard testing. |
+| 5 | accessibility | [accessible-forms-review](skills/accessible-forms-review/SKILL.md) | Review field labels, associations, and error-recovery tests. |
+| 6 | accessibility | [accessible-design-system](skills/accessible-design-system/SKILL.md) | Calculate color-pair contrast and review component states. |
+| 7 | accessibility | [accessibility-report-generator](skills/accessibility-report-generator/SKILL.md) | Prioritize findings while preserving automated/human provenance. |
+| 8 | cybersecurity | [threat-model-generator](skills/threat-model-generator/SKILL.md) | Generate boundary-aware threat hypotheses from assets and flows. |
+| 9 | cybersecurity | [secure-code-review](skills/secure-code-review/SKILL.md) | Review selected Python calls and shell usage without execution. |
+| 10 | cybersecurity | [dependency-sbom-review](skills/dependency-sbom-review/SKILL.md) | Review supported CycloneDX/SPDX component metadata and references. |
+| 11 | cybersecurity | [secrets-exposure-audit](skills/secrets-exposure-audit/SKILL.md) | Identify selected credential patterns with redacted findings. |
+| 12 | cybersecurity | [api-security-review](skills/api-security-review/SKILL.md) | Review OpenAPI security declarations and authorization test needs. |
+| 13 | cybersecurity | [nist-csf-control-mapper](skills/nist-csf-control-mapper/SKILL.md) | Map candidate evidence to six CSF 2.0 functions. |
+| 14 | cybersecurity | [secure-development-lifecycle](skills/secure-development-lifecycle/SKILL.md) | Review lifecycle evidence across four SSDF 1.1 practice groups. |
+| 15 | ai-governance | [ai-system-inventory](skills/ai-system-inventory/SKILL.md) | Normalize accountable system records and flag evidence gaps. |
+| 16 | ai-governance | [ai-risk-register](skills/ai-risk-register/SKILL.md) | Validate, score, and prioritize risks under an explicit local policy. |
+| 17 | ai-governance | [ai-model-card-generator](skills/ai-model-card-generator/SKILL.md) | Structure supplied model-use, data, evaluation, and limitation evidence. |
+| 18 | ai-governance | [ai-evaluation-planner](skills/ai-evaluation-planner/SKILL.md) | Plan local evaluation gates and compare supplied observations. |
+| 19 | ai-governance | [ai-governance-controls-mapper](skills/ai-governance-controls-mapper/SKILL.md) | Map candidate evidence to four AI RMF 1.0 functions. |
+| 20 | ai-governance | [llm-application-security-review](skills/llm-application-security-review/SKILL.md) | Review evidence gaps across ten OWASP 2025 LLM risk topics. |
 
 ## Design principles
 
@@ -39,11 +39,40 @@ This repository is in its planning stage. The 20 skills below are a proposed roa
 - **Accessible outputs:** write clear guidance and produce artifacts usable by diverse teams.
 - **Responsible operation:** minimize sensitive data collection and require authorization for security testing.
 
-Potential reference frameworks include WCAG, OWASP guidance, the NIST Cybersecurity Framework, the NIST AI Risk Management Framework, and relevant ISO/IEC standards. These are candidate references, not claims of certification, endorsement, or complete coverage. Standards text will not be reproduced without appropriate rights.
+References include WCAG 2.2, WAI-ARIA 1.2, NIST CSF 2.0, NIST AI RMF 1.0, NIST SSDF 1.1, OWASP ASVS 5.0.0, OWASP API Security Top 10 (2023), and OWASP LLM Top 10 (2025). The [standards registry](standards/registry.yaml) records selected editions, official URLs, verification status, and scope. These references are not claims of certification, endorsement, or complete coverage. Restricted standards text is not reproduced.
 
-## Intended skill structure
+## Quick start
 
-Each future skill is expected to include a `SKILL.md` with its purpose, triggers, prerequisites, workflow, safeguards, expected outputs, and validation criteria. Supporting references, templates, or scripts will be added only where needed. The final directory layout will be established when implementation begins.
+Use Python 3.12+ in an isolated environment:
+
+```sh
+python -m venv .venv
+# Activate .venv for your shell, then:
+python -m pip install -e ".[dev]"
+trust-skills list
+trust-skills validate --root .
+trust-skills run accessible-html-review --input skills/accessible-html-review/examples/input.html
+trust-skills run dependency-sbom-review --input skills/dependency-sbom-review/examples/input.json
+trust-skills run ai-risk-register --input skills/ai-risk-register/examples/input.json --format markdown
+python -m pytest -q
+```
+
+For Windows, Codex, and other compatible agents, read [installation](docs/installation.md). The shared CLI is installed separately from skill folders; examples assume the repository root as the working directory. No package publication or automatic agent configuration is performed.
+
+## Structure and verification
+
+- `skills/<name>/SKILL.md`: activation, inputs, procedures, outputs, examples, validation, limitations, and official references.
+- `skills/<name>/examples/`: safe synthetic runnable inputs.
+- `src/trust_skills/`: offline Python tools and the `trust-skills` CLI.
+- `tests/`: deterministic behavioral tests for all 20 skills, metadata, privacy, invalid inputs, and reports.
+- `standards/registry.yaml`: source verification and edition notes.
+- `.github/workflows/ci.yml`: lint, formatting, tests, skill validation, and builds across Python 3.12–3.14 on Linux and Windows.
+
+See [CLI contracts](docs/cli.md), [development guidance](docs/development.md), [local validation results](docs/validation.md), and [branch publication and PR guidance](docs/publishing.md).
+
+## Assessment boundaries
+
+Automated checks are bounded heuristics and evidence transformations. They do not perform browser or screen-reader testing, send API requests, run models, query vulnerability feeds, prove control effectiveness, or establish legal compliance. Standards mappings use explicit subsets; framework mapping stops at function/practice-group level. Reports distinguish candidates and supplied assertions from human-reviewed conclusions. A report with no findings means only that the implemented checks found none.
 
 ## Contributing and security
 

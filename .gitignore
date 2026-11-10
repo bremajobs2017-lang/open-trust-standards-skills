@@ -32,3 +32,8 @@ coverage/
 *.log
 tmp/
 temp/
+*.egg-info/
+.coverage
+.coverage.*
+htmlcov/
+pytest-cache-files-*/

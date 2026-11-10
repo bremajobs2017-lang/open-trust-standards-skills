@@ -1,0 +1,11 @@
+{
+  "controls": [
+    {
+      "id": "AI-C1",
+      "function": "GOVERN",
+      "owner": "AI governance team",
+      "description": "Accountability policy",
+      "evidence": "Synthetic policy record"
+    }
+  ]
+}

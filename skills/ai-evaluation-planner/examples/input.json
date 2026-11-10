@@ -1,0 +1,26 @@
+{
+  "system_id": "S1",
+  "owner": "Evaluation team",
+  "decision": "Review synthetic demo release",
+  "metrics": [
+    {
+      "id": "E1",
+      "metric": "answer accuracy",
+      "dataset": "synthetic-heldout",
+      "slice": "demo prompts",
+      "method": "Human-scored synthetic rubric",
+      "direction": "at_least",
+      "threshold": 0.9,
+      "observed": 0.8
+    },
+    {
+      "id": "E2",
+      "metric": "latency p95 ms",
+      "dataset": "synthetic-load-plan",
+      "slice": "demo workload",
+      "method": "Planned load test",
+      "direction": "at_most",
+      "threshold": 500
+    }
+  ]
+}
