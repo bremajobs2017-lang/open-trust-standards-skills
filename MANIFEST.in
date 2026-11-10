@@ -6,3 +6,4 @@ recursive-include tests *.py
 recursive-include tests/fixtures *.json *.html
 recursive-include scripts *.py
 recursive-include requirements *.txt
+recursive-include .github/workflows *.yml

@@ -44,6 +44,7 @@ jobs:
       - name: Build source and wheel distributions
         run: python -m build --no-isolation
       - name: Prepare pinned offline install dependencies
-        run: python -m pip download --only-binary=:all: --dest tmp/qa-wheelhouse -r requirements/smoke.txt
+        run: |
+          python -m pip download --only-binary=:all: --dest tmp/qa-wheelhouse -r requirements/smoke.txt
       - name: Clean sdist and wheel installation smoke tests
         run: python scripts/install_smoke.py --wheelhouse tmp/qa-wheelhouse
