@@ -1,0 +1,16 @@
+{
+  "color_pairs": [
+    {
+      "id": "body",
+      "foreground": "#777777",
+      "background": "#FFFFFF",
+      "usage": "normal_text"
+    },
+    {
+      "id": "strong",
+      "foreground": "#000000",
+      "background": "#FFFFFF",
+      "usage": "normal_text"
+    }
+  ]
+}

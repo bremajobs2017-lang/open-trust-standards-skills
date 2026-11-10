@@ -1,0 +1,8 @@
+{
+  "system_id": "S1",
+  "owner": "Application security",
+  "controls": {
+    "output_validation": "Synthetic renderer test record",
+    "tool_least_privilege": "Synthetic scoped-tool policy"
+  }
+}

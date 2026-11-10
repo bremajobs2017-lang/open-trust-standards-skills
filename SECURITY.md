@@ -2,7 +2,11 @@
 
 ## Supported versions
 
-This project is in its planning stage and has no released skills or supported release versions. Security-related fixes currently target the `main` branch. A release support policy will be established when releases are introduced.
+The initial library is pre-release (package version 0.1.0). There are no supported stable release lines yet. Report vulnerabilities in the current repository version; fixes target the active development branch until reviewed and merged. A release support policy will be established with stable releases.
+
+## Tool boundaries
+
+Local review helpers do not execute input code, send network requests, or validate live credentials. Inputs are limited to 5 MB. Secret detection and output redaction cover selected patterns only and are not a data-loss-prevention system. Use synthetic or approved sanitized artifacts, inspect reports before sharing them, and keep real incident evidence private. Install dependencies from trusted sources in an isolated environment.
 
 ## Reporting a vulnerability
 

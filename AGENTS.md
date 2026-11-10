@@ -2,7 +2,7 @@
 
 ## Scope and status
 
-Work only in this repository and within the user's requested scope. This repository currently contains planning and community documentation. Do not implement the planned 20 skills until the repository owner explicitly requests implementation.
+Work only in this repository and within the user's requested scope. The owner has explicitly authorized implementation of the 20 skills listed in README.md. Preserve unrelated user changes; do not create repositories, modify unrelated projects, force-push, or merge into main automatically.
 
 ## Working practices
 
@@ -14,9 +14,11 @@ Work only in this repository and within the user's requested scope. This reposit
 - Do not claim certification, compliance, test execution, or standards coverage without supporting evidence.
 - Security testing requires explicit authorization and a defined target scope.
 
-## Future skill implementation
+## Skill implementation
 
-When implementation is authorized, define each skill's purpose, triggers, inputs, prerequisites, workflow, safeguards, outputs, and validation criteria. Include human review checkpoints for consequential decisions. Avoid unnecessary dependencies and duplication.
+Each skill lives in skills/<name>/SKILL.md and follows the Agent Skills specification. Define its purpose, triggers, inputs, prerequisites, workflow, safeguards, outputs, examples, validation criteria, limitations, and official references. Include human review checkpoints for consequential decisions. Avoid unnecessary dependencies and duplication.
+
+Shared Python 3.12+ tools live in src/trust_skills. Run `python -m pip install -e ".[dev]"`, `python -m ruff check src tests`, `python -m ruff format --check src tests`, `python -m pytest -q`, and `trust-skills validate --root .`. Every skill needs a synthetic example and meaningful deterministic tests. Keep the CLI catalog, standards registry, skill documentation, and test coverage synchronized. No network access or input execution belongs in local review helpers.
 
 ## Validation and reporting
 

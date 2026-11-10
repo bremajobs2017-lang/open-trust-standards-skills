@@ -1,0 +1,11 @@
+{
+  "controls": [
+    {
+      "id": "C1",
+      "function": "GV",
+      "owner": "Security governance",
+      "description": "Risk oversight cadence",
+      "evidence": "Synthetic charter v1"
+    }
+  ]
+}

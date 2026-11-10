@@ -1,0 +1,17 @@
+{
+  "systems": [
+    {
+      "id": "S1",
+      "name": "Synthetic summarizer",
+      "owner": "Product team",
+      "purpose": "Summarize public demo text",
+      "model": "synthetic-model-v1",
+      "lifecycle": "deployed",
+      "data_classification": "public-synthetic",
+      "oversight": "Human approves publication",
+      "affected_groups": [
+        "Demo users"
+      ]
+    }
+  ]
+}

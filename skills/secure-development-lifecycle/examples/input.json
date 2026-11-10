@@ -1,0 +1,11 @@
+{
+  "controls": [
+    {
+      "id": "G1",
+      "practice_group": "PW",
+      "owner": "Engineering",
+      "description": "Peer code review gate",
+      "evidence": "Synthetic review record"
+    }
+  ]
+}

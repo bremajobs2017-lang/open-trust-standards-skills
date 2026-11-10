@@ -1,0 +1,24 @@
+{
+  "assets": [
+    {
+      "id": "client",
+      "name": "Synthetic browser",
+      "boundary": "external",
+      "classification": "public"
+    },
+    {
+      "id": "service",
+      "name": "Synthetic service",
+      "boundary": "internal",
+      "classification": "internal"
+    }
+  ],
+  "flows": [
+    {
+      "id": "F1",
+      "source": "client",
+      "target": "service",
+      "data": "Synthetic query"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "findings": [
+    {
+      "id": "A1",
+      "criterion": "1.1.1",
+      "severity": "high",
+      "location": "synthetic catalog image",
+      "evidence": "Missing alt in static source",
+      "recommendation": "Determine image purpose and supply an appropriate alternative",
+      "status": "open",
+      "method": "automated"
+    }
+  ]
+}

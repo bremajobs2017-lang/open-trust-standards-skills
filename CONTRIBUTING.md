@@ -4,7 +4,7 @@ Thank you for helping make trust standards practical and accessible.
 
 ## Current scope
 
-The repository is in its planning stage. Documentation improvements and roadmap feedback are welcome. Implementation of the 20 planned Agent Skills will begin only after the repository owner authorizes that phase.
+The owner has authorized the initial 20-skill library. Contributions to skill guidance, safe local tools, synthetic examples, standards traceability, and validation are welcome. Discuss additional skills or major scope changes with the maintainer first.
 
 ## Proposing changes
 
@@ -15,6 +15,8 @@ The repository is in its planning stage. Documentation improvements and roadmap 
 5. Open a pull request explaining the change, its purpose, verification performed, and limitations.
 
 ## Quality expectations
+
+Use Python 3.12+ and install development dependencies with `python -m pip install -e ".[dev]"`. Before submitting, run `python -m ruff check src tests`, `python -m ruff format --check src tests`, `python -m pytest -q`, `trust-skills validate --root .`, and `python -m build`. The CI matrix checks Python 3.12–3.14 on Linux and Windows. See [development guidance](docs/development.md) for architecture and test expectations.
 
 - Use plain, inclusive language and accessible examples.
 - Cite authoritative sources and specify standards versions and assessment scope.
